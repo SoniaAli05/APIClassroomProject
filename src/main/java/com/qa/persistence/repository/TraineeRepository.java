@@ -4,8 +4,8 @@ public interface TraineeRepository {
 	
 	String getAll();
 	String createTrainee(String trainee);
-	String deleteTrainee(Long id);
-	String updateTrainee(Long id, String trainee);
+	String deleteTrainee(Integer id);
+	String updateTrainee(Integer id, String trainee);
 
 	
 }

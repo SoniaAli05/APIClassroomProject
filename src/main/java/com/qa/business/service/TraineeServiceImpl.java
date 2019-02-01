@@ -12,12 +12,10 @@ public class TraineeServiceImpl implements TraineeService{
 	@Inject 
 	private TraineeRepository repo;
 
-	@Override
 	public String getAll() {
 		return repo.getAll();
 	}
 
-	@Override
 	public String createTrainee(String trainee) {
 		Trainee aTrainee = util.getObjectForJSON(trainee, Trainee.class);
 		if(aTrainee.getTraineeName() == "Charlotte Hoy") {
@@ -26,13 +24,11 @@ public class TraineeServiceImpl implements TraineeService{
 		return repo.createTrainee(trainee);
 	}
 
-	@Override
-	public String deleteTrainee(Long id) {
+	public String deleteTrainee(Integer id) {
 		return repo.deleteTrainee(id);
 	}
 
-	@Override
-	public String updateTrainee(Long id, String trainee) {
+	public String updateTrainee(Integer id, String trainee) {
 		return repo.updateTrainee(id, trainee);
 	}
 

@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import com.qa.persistence.domain.Classroom;
 import com.qa.persistence.domain.Trainee;
 import com.qa.util.JSONUtil;
 
@@ -26,7 +27,7 @@ public class TraineeImpl implements TraineeRepository{
 	@Override
 	@Transactional(REQUIRED)
 	public String getAll() {
-		Query query = em.createQuery("SELECT a FROM Account a");
+		Query query = em.createQuery("SELECT a FROM Trainee a");
 		return (util.getJSONForObject(query.getResultList()));
 	}
 
@@ -40,25 +41,19 @@ public class TraineeImpl implements TraineeRepository{
 
 	@Override
 	@Transactional(REQUIRED)
-	public String deleteTrainee(Long id) {
-		Trainee classroomInDB = em.find(Trainee.class, id);
-		if(classroomInDB != null) {
-			em.remove(classroomInDB);
-		}		
-		return " ";
+	public String deleteTrainee(Integer id) {
+		Query query = em.createQuery("DELETE a FROM Trainee a WHERE a.id = "+ id, Trainee.class);
+		return (util.getJSONForObject(query.getResultList()));
 	}
 
 	@Override
 	@Transactional(REQUIRED)
-	public String updateTrainee(Long id, String trainee) {
-		Trainee accountInDB = em.find(Trainee.class, id);
-		if(accountInDB != null) {
-			em.remove(accountInDB);	
-			Trainee anAccount = util.getObjectForJSON(trainee, Trainee.class);
-			em.persist(anAccount);
-	}
-	return " ";
-	}
-	
+	public String updateTrainee(Integer id, String trainee) {
+		Trainee aTrainee = util.getObjectForJSON(trainee, Trainee.class);
+		Query query = em.createQuery("DELETE a FROM Classroom a WHERE a.id = "+ id, Trainee.class);
+		em.persist(aTrainee);
+		return "{\"message: updated\"} ";
 
+
+}
 }
