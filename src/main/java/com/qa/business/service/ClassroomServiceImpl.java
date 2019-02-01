@@ -28,12 +28,12 @@ public class ClassroomServiceImpl implements ClassroomService{
 	}
 
 	@Override
-	public String deleteClassroomTrainer(Long id) {
+	public String deleteClassroomTrainer(Integer id) {
 		return repo.deleteClassroomTrainer(id);
 	}
 
 	@Override
-	public String updateClassrooomTrainer(Long id, String trainer) {
+	public String updateClassrooomTrainer(Integer id, String trainer) {
 		return repo.updateClassrooomTrainer(id, trainer);
 	}
 		

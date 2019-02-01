@@ -1,5 +1,6 @@
 package com.qa.persistence.domain;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,22 +10,26 @@ import javax.persistence.Id;
 public class Trainee {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	private Long id;
+	private Integer id;
+	private Integer classid;
 	private String traineeName;
+
 
 	public Trainee() {
 
 	}
 
-	public Trainee(String traineeName) {
+	public Trainee(Integer id, Integer classid, String traineeName) {
 		this.traineeName = traineeName;
+		this.setClassid(classid);
+		this.id = id;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -34,6 +39,14 @@ public class Trainee {
 
 	public void setTraineeName(String traineeName) {
 		this.traineeName = traineeName;
+	}
+
+	public Integer getClassid() {
+		return classid;
+	}
+
+	public void setClassid(Integer classid) {
+		this.classid = classid;
 	}
 
 }

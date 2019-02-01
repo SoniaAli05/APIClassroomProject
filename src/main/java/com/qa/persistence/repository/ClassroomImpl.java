@@ -26,7 +26,7 @@ public class ClassroomImpl implements ClassroomTrainerRepository{
 	@Override
 	@Transactional(REQUIRED)
 	public String getAll() {
-		Query query = em.createQuery("SELECT a FROM Account a");
+		Query query = em.createQuery("SELECT a FROM Classroom a");
 		return (util.getJSONForObject(query.getResultList()));
 	}
 
@@ -39,25 +39,19 @@ public class ClassroomImpl implements ClassroomTrainerRepository{
 	}
 
 	@Override
-	public String deleteClassroomTrainer(Long id) {
-		Classroom classroomInDB = em.find(Classroom.class, id);
-		if(classroomInDB != null) {
-			em.remove(classroomInDB);
-		}		
-		return " ";
+	public String deleteClassroomTrainer(Integer id) {
+		Query query = em.createQuery("DELETE a FROM Classroom a WHERE a.id = " + id, Classroom.class);
+		return (util.getJSONForObject(query.getResultList()));
 	}
 
 	@Override
 	@Transactional(REQUIRED)
-	public String updateClassrooomTrainer(Long id, String trainer) {
-		Classroom accountInDB = em.find(Classroom.class, id);
-		if(accountInDB != null) {
-			em.remove(accountInDB);	
-			Classroom anAccount = util.getObjectForJSON(trainer, Classroom.class);
-			em.persist(anAccount);
-	}
-	return " ";
-	}
+	public String updateClassrooomTrainer(Integer id, String trainer) {
+		Classroom aTrainer = util.getObjectForJSON(trainer, Classroom.class);
+		Query query = em.createQuery("DELETE a FROM Classroom a WHERE a.id = "+ id);
+		em.persist(aTrainer);
+		return "{\"message: updated\"} ";
 
 	
+}
 }
